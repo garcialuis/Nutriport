@@ -46,6 +46,24 @@ var foodVarieties = []models.FoodVariety{
 	},
 }
 
+var foodGroups = []models.FoodGroup{
+	models.FoodGroup{
+		FoodGroupName: "Vegetables",
+	},
+	models.FoodGroup{
+		FoodGroupName: "Fuits",
+	},
+	models.FoodGroup{
+		FoodGroupName: "Grains",
+	},
+	models.FoodGroup{
+		FoodGroupName: "Protein",
+	},
+	models.FoodGroup{
+		FoodGroupName: "Dairy",
+	},
+}
+
 func Load(db *gorm.DB) {
 
 	err := db.Debug().DropTableIfExists(&models.FoodItem{}, &models.CarbLevel{}, &models.FoodGroup{}, &models.FoodVariety{}).Error
@@ -86,6 +104,13 @@ func Load(db *gorm.DB) {
 		err = db.Debug().Model(&models.FoodVariety{}).Create(&foodVarieties[i]).Error
 		if err != nil {
 			log.Fatalf("Could not seed FoodVarieties table: %v", err)
+		}
+	}
+
+	for i := range foodGroups {
+		err = db.Debug().Model(&models.FoodGroup{}).Create(&foodGroups[i]).Error
+		if err != nil {
+			log.Fatalf("Could not seed FoodGroup table: %v", err)
 		}
 	}
 }
