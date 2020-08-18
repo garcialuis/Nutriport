@@ -1,6 +1,8 @@
 package controllers
 
+import "github.com/garcialuis/Nutriport/api/middlewares"
+
 func (s *Server) InitializeRoutes() {
 	// Home
-	s.Router.HandleFunc("/", s.Home).Methods("GET")
+	s.Router.HandleFunc("/", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")
 }
