@@ -19,6 +19,33 @@ var carbohydrates = []models.CarbLevel{
 	},
 }
 
+var foodVarieties = []models.FoodVariety{
+	models.FoodVariety{
+		FoodVarietyName: "Raw",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Coocked from frozen",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Coocked from frozen with skin",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Coocked from fresh",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Coocked from fresh with skin",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Coocked from canned",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Canned",
+	},
+	models.FoodVariety{
+		FoodVarietyName: "Not Applicable",
+	},
+}
+
 func Load(db *gorm.DB) {
 
 	err := db.Debug().DropTableIfExists(&models.FoodItem{}, &models.CarbLevel{}, &models.FoodGroup{}, &models.FoodVariety{}).Error
@@ -52,6 +79,13 @@ func Load(db *gorm.DB) {
 		err = db.Debug().Model(&models.CarbLevel{}).Create(&carbohydrates[i]).Error
 		if err != nil {
 			log.Fatalf("Could not seed table with Carbohydrate levels: %v", err)
+		}
+	}
+
+	for i := range foodVarieties {
+		err = db.Debug().Model(&models.FoodVariety{}).Create(&foodVarieties[i]).Error
+		if err != nil {
+			log.Fatalf("Could not seed FoodVarieties table: %v", err)
 		}
 	}
 }
