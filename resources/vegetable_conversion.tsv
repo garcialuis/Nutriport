@@ -1,0 +1,128 @@
+Item	Variety	Cup_Quantity	 GW wt	 Oz. Wt	Carb_level_id	Notes
+Arugula	Raw	0.5	10	0.35	1	chopped
+Asparagus	Raw	0.5	67	2.36	2	
+Asparagus	Cooked from frozen variety	0.5	90	3.17	2	
+Asparagus	Cooked from fresh variety	0.5	90	3.17	2	
+Asparagus	Cooked from canned variety	0.5	121	4.27	2	
+Broccoli	Raw	0.5	44	1.55	3	
+Broccoli	Cooked from frozen variety	0.5	92	3.24	3	
+Broccoli	Cooked from fresh variety	0.5	78	2.75	3	
+Broccoli, Chinese	Cooked from fresh variety	0.5	44	1.55	3	
+Broccoli, Raab	Raw	0.5	20	0.71	3	chopped
+Broccoli, Raab	Cooked from fresh variety	0.5	44	1.55	3	
+Cabbage	Raw	0.5	44.5	1.57	2	chopped
+Cabbage	Raw	0.5	35	1.23	2	shredded
+Cabbage, Chinese (Bok-Choy)	Raw	0.5	35	1.23	2	shredded
+Cabbage, Chinese (Bok-Choy)	Cooked from fresh variety	0.5	85	3	2	shredded
+Cabbage, Chinese (Pe-Tsai)	Raw	0.5	38	1.34	2	shredded
+Cabbage, Chinese (Pe-Tsai)	Cooked from fresh variety	0.5	59.5	2.1	2	
+Cabbage, Common	Cooked from fresh variety	0.5	75	2.65	2	
+Cabbage, Napa	Cooked from fresh variety	0.5	54.5	1.92	2	
+Cabbage, Red	Raw	0.5	35	1.23	3	shredded
+Cabbage, Red	Cooked from fresh variety	0.5	75	2.65	3	
+Cabbage, Savoy	Raw	0.5	35	1.23	2	shredded
+Cabbage, Savoy	Cooked from fresh variety	0.5	72.5	2.56	2	
+Cabbage, Swamp	Cooked from fresh variety	0.5	49	1.73	2	
+Cabbage, Swamp	Raw	0.5	28	0.99	2	Skunk, Cabbage chopped
+Cauliflower	Raw	0.5	50	1.76	2	
+Cauliflower	Cooked from frozen variety	0.5	90	3.17	2	
+Cauliflower	Cooked from fresh variety	0.5	62	2.19	2	
+Cauliflower, Green	Raw	0.5	32	1.13	2	
+Cauliflower, Green	Cooked from fresh variety	0.5	62	2.19	2	
+Celery	Raw	0.5	50.5	1.78	1	chopped
+Celery	Cooked from fresh variety	0.5	75	2.65	1	
+Chard, Swiss	Raw	0.5	18	0.63	1	
+Chard, Swiss	Cooked from fresh variety	0.5	87.5	3.09	3	
+Collard Greens	Cooked from fresh variety	0.5	95	3.35	3	
+Collard Greens	Raw	1	36	1.27	1	chopped
+Cucumber, no peel	Raw	0.5	59.5	2.1	1	slices
+Cucumber, with peel	Raw	0.5	52	1.83	1	slices
+Eggplant	Raw	0.5	41	1.45	2	cubes
+Eggplant	Cooked from fresh variety	0.5	49.5	1.75	2	
+Escarole	Raw	0.5	25	0.88	1	shredded
+Fennel bulb	Raw	0.5	43.5	1.53	2	slices
+Green beans	Raw	0.5	55	1.94	3	
+Green beans	Cooked from frozen variety	0.5	67.5	2.38	3	
+Green beans	Cooked from fresh variety	0.5	62.5	2.2	3	
+Green beans	Cooked from canned variety	0.5	67.5	2.38	3	
+Greens, Mustard	Cooked from frozen variety	0.5	75	2.65	1	
+Greens, Mustard	Cooked from fresh variety	0.5	70	2.47	1	
+Greens, Mustard	Raw	1	56	1.98	1	chopped
+Greens, Turnip	Raw	0.5	27.5	0.97	1	chopped
+Greens, Turnip	Cooked from frozen variety	0.5	82	2.89	1	
+Greens, Turnip	Cooked from fresh variety	0.5	72	2.54	1	
+Greens, Turnip NSA	Cooked from canned variety	0.5	72	2.54	1	
+Heart of Palm	Canned	0.5	73	2.57	3	
+Jalapeño	Raw	0.5	45	1.59	1	slices
+Jicama	Raw	0.5	65	2.29	3	
+Jicama	Cooked from fresh variety	0.5	65	2.29	3	
+Kale	Raw	0.5	33.5	1.18	2	chopped
+Kale	Cooked from frozen variety	0.5	65	2.29	2	
+Kale	Cooked from fresh variety	0.5	65	2.29	2	
+Kale, Scotch	Raw	0.5	33.5	1.18	2	chopped
+Kale, Scotch	Cooked from fresh variety	0.5	65	2.29	2	chopped
+Kohlrabi	Raw	0.5	67.5	2.38	3	
+Kohlrabi	Cooked from fresh variety	0.5	82.5	2.91	3	
+Lettuce, Butterhead	Raw	1	55	1.94	1	including Boston and Bibb - shredded or chopped
+Lettuce, Endive	Raw	1	50	1.76	1	chopped
+Lettuce, Iceberg	Raw	1	72	2.54	1	shredded
+Lettuce, Romaine	Raw	1	47	1.66	1	shredded
+Lettuce, Spring Mix	Raw	1	42.5	1.5	1	shredded
+Mushroom	Cooked from fresh variety	0.5	78	2.75	1	
+Mushroom	Cooked from canned variety	0.5	78	2.75	1	
+Mushroom, Brown	Raw	0.5	36	1.27	1	Italian or Crimini sliced
+Mushroom, Portabella	Raw	0.5	43	1.52	2	sliced
+Mushroom, Portabella	Cooked from fresh variety	0.5	60.5	2.13	2	sliced
+Mushroom, Straw	Cooked from canned variety	0.5	91	3.21	1	
+Mushroom, White	Raw	0.5	35	1.23	1	pieces
+Mushroom, White	Cooked from fresh variety	0.5	78	2.75	1	
+Nopales	Raw	0.5	43	1.52	1	slices
+Okra	Raw	0.5	50	1.76	3	
+Okra	Cooked from frozen variety	0.5	92	3.25	3	
+Okra	Cooked from fresh variety	0.5	80	2.82	3	
+Peppers, Green Sweet	Raw	0.5	74.5	2.63	3	chopped
+Peppers, Green Sweet	Cooked from frozen variety	0.5	68	2.4	3	
+Peppers, Green Sweet	Cooked from fresh variety	0.5	68	2.4	3	
+Peppers, Green Sweet	Cooked from canned variety	0.5	70	2.47	3	
+Peppers, Red Sweet	Raw	0.5	74.5	2.63	3	chopped
+Peppers, Red Sweet	Cooked from frozen variety	0.5	68	2.4	3	
+Peppers, Red Sweet	Cooked from fresh variety	0.5	68	2.4	3	
+Peppers, Red Sweet	Cooked from canned variety	0.5	70	2.47	3	
+Peppers, Yellow Sweet	Raw	0.5	74.5	2.63	3	chopped
+Radishes	Raw	0.5	58	2.05	1	slices
+Radishes, Oriental	Raw	0.5	58	2.05	1	slices
+Radishes, Oriental	Cooked from fresh variety	0.5	73.5	2.59	1	slices
+Sauerkraut (low-sodium)	Raw	0.5	71	2.5	3	
+Scallions	Raw	0.5	50	1.76	3	
+Shirataki Noodles	N/A	0.5	113	3.99	3	
+Spinach	Cooked from frozen variety	0.5	95	3.35	2	
+Spinach	Cooked from fresh variety	0.5	90	3.77	2	
+Spinach	Cooked from canned variety	0.5	107	3.77	2	
+Spinach, Malabar	Cooked from fresh variety	0.5	90	3.17	2	
+Spinach, Mustard (Tendergreen)	Cooked from fresh variety	0.5	90	3.17	2	chopped
+Spinach, Mustard (Tendergreen)	Raw	1	150	5.29	1	chopped
+Spinach, New Zealand	Cooked from frozen variety	0.5	90	3.17	2	chopped
+Spinach, New Zealand	Raw	1	56	1.97	1	chopped
+Spinach	Raw	1	30	1.06	1	
+Sprouts, Alfalfa	Raw	0.5	16.5	0.58	1	
+Sprouts, Mung Bean Sprouts	Raw	0.5	52	1.83	1	
+Sprouts, Mung Bean Sprouts	Cooked from fresh variety	0.5	62	2.19	1	
+Squash, Summer, Crookneck and Straightneck	Raw	0.5	65	2.29	3	sliced
+Squash, Summer, Crookneck and Straightneck	Cooked from frozen variety	0.5	96	3.39	3	slices
+Squash, Summer, Crookneck and Straightneck	Cooked from fresh variety	0.5	90	3.17	3	slices
+Squash, Summer, Crookneck and Straightneck w/skin	Cooked from canned variety	0.5	105	3.7	3	
+Squash, Summer, Scallop	Raw	0.5	65	2.29	2	sliced
+Squash, Summer, Scallop	Cooked from frozen variety	0.5	90	3.17	2	slices
+Squash, Summer, Zucchini w/skin	Raw	0.5	56.5	1.99	2	sliced
+Squash, Summer, Zucchini	Cooked from fresh variety w/skin	0.5	90	3.17	2	
+Squash, Summer, Zucchini	Cooked from frozen variety w/skin	0.5	111.5	3.93	2	
+Squash, Spaghetti	Raw	0.5	50.5	1.78	3	cubes
+Squash, Spaghetti	Cooked from fresh variety	0.5	77.5	2.73	3	
+Tomato, red ripe	Raw	0.5	90	3.17	3	chopped or sliced
+Tomato, red ripe	Raw	0.5	74.5	2.63	3	cherry
+Tomato, red ripe packed in tomato juice	Cooked from canned variety	0.5	120	4.23	3	with juice
+Tomato, red ripe	Cooked from fresh variety	0.5	120	4.23	3	
+Turnips	Raw	0.5	65	2.29	3	cubes
+Turnips	Cooked from frozen variety	0.5	78	2.75	3	
+Turnips	Cooked from fresh variety	0.5	78	2.75	3	
+Watercress	Raw	1	34	1.2	1	chopped
