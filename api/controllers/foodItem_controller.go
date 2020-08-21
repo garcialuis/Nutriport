@@ -45,10 +45,10 @@ func (server *Server) CreateFoodItem(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetFoodItemByName is responsible for retrieving a food item with a specified name
-// swagger:route GET /fooditem/{name} foodItem GetFoodItemByName
+// swagger:route GET /fooditem/{foodName} foodItem GetFoodItemByName
 //
 //	Responses:
-//		201: foodItemResponse
+//		200: foodItemResponse
 //		422: description: Unprocessable Entity
 //		500: description: Internal Server Error
 func (server *Server) GetFoodItemByName(w http.ResponseWriter, r *http.Request) {
@@ -78,7 +78,7 @@ func (server *Server) GetFoodItemByName(w http.ResponseWriter, r *http.Request) 
 // swagger:route GET /fooditem foodItem GetAllFoodItems
 //
 //	Responses:
-//		201: foodItemsResponse
+//		200: foodItemsResponse
 //		422: description: Unprocessable Entity
 //		500: description: Internal Server Error
 func (server *Server) GetAllFoodItems(w http.ResponseWriter, r *http.Request) {

@@ -140,7 +140,7 @@ paths:
     get:
       operationId: GetAllFoodItems
       responses:
-        "201":
+        "200":
           $ref: '#/responses/foodItemsResponse'
         "422":
           description: ' Unprocessable Entity'
@@ -159,11 +159,11 @@ paths:
           description: ' Internal Server Error'
       tags:
       - foodItem
-  /fooditem/{name}:
+  /fooditem/{foodName}:
     get:
       operationId: GetFoodItemByName
       responses:
-        "201":
+        "200":
           $ref: '#/responses/foodItemResponse'
         "422":
           description: ' Unprocessable Entity'
