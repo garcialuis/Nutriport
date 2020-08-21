@@ -11,6 +11,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// CreateFoodItem is responsible for creating/storing a new food item into the db
+// swagger:route POST /fooditem foodItem CreateFoodItem
+//
+//	Responses:
+//		201: foodItemResponse
+//		422: description: Unprocessable Entity
+//		500: description: Internal Server Error
 func (server *Server) CreateFoodItem(w http.ResponseWriter, r *http.Request) {
 
 	body, err := ioutil.ReadAll(r.Body)
@@ -37,6 +44,13 @@ func (server *Server) CreateFoodItem(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusCreated, foodItemCreated)
 }
 
+// GetFoodItemByName is responsible for retrieving a food item with a specified name
+// swagger:route GET /fooditem/{foodName} foodItem GetFoodItemByName
+//
+//	Responses:
+//		200: foodItemResponse
+//		422: description: Unprocessable Entity
+//		500: description: Internal Server Error
 func (server *Server) GetFoodItemByName(w http.ResponseWriter, r *http.Request) {
 
 	foodItem := models.FoodItem{}
@@ -58,4 +72,24 @@ func (server *Server) GetFoodItemByName(w http.ResponseWriter, r *http.Request) 
 	}
 
 	responses.JSON(w, http.StatusOK, itemFound)
+}
+
+// GetAllFoodItems is responsible for retrieving all food items in the database
+// swagger:route GET /fooditem foodItem GetAllFoodItems
+//
+//	Responses:
+//		200: foodItemsResponse
+//		422: description: Unprocessable Entity
+//		500: description: Internal Server Error
+func (server *Server) GetAllFoodItems(w http.ResponseWriter, r *http.Request) {
+
+	foodItem := models.FoodItem{}
+
+	foodItems, err := foodItem.SelectAll(server.DB)
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	responses.JSON(w, http.StatusOK, foodItems)
 }

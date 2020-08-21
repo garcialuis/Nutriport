@@ -1,0 +1,189 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  CarbLevel:
+    description: |-
+      CarbLevel is a numeric rank representation of the carbohydrates present in the food item
+      The higher the level, the more carbohydrates the item has.
+    properties:
+      description:
+        description: The description is a string describing the level, this will be either low, moderate, or high
+        type: string
+        x-go-name: Description
+      id:
+        description: 'The id represents the carb level id: 1 = low, 2 = moderate, 3 = high in carbs'
+        format: uint8
+        minimum: 1
+        type: integer
+        x-go-name: ID
+    required:
+    - id
+    type: object
+    x-go-package: github.com/garcialuis/Nutriport/api/models
+  FoodGroup:
+    description: |-
+      FoodGroup identifies the food group that a food item belongs to
+      Food groups can be: fruit, dairy, protein, etc...
+    properties:
+      foodGroupName:
+        description: FoodGroupName is a string describing the food group
+        example: fruit or dairy
+        type: string
+        x-go-name: FoodGroupName
+      id:
+        description: |-
+          ID is the database id that is given to the food group record
+          This value is required when inputing a new food item.
+        format: uint8
+        minimum: 1
+        type: integer
+        x-go-name: ID
+    required:
+    - id
+    type: object
+    x-go-package: github.com/garcialuis/Nutriport/api/models
+  FoodItem:
+    description: |-
+      FoodItem is the model that contains all information about an item
+      It includes the food variety, carb level, and food group information for a given item
+    properties:
+      CarbLevelID:
+        description: CarbLevelID is the reference to the carb level in the database table
+        format: uint8
+        type: integer
+      FoodGroupID:
+        description: FoodGroupID is the reference to the group from the food group db table
+        format: uint8
+        minimum: 1
+        type: integer
+      FoodVarietyID:
+        description: FoodVarietyID is a reference to the FoodVariety record in the db
+        format: uint16
+        minimum: 1
+        type: integer
+      GMWt:
+        description: GramWeight represents the allowed weight to intake - in grams
+        format: float
+        type: number
+        x-go-name: GramWeight
+      OzWt:
+        description: OnceWeight represents the allowed weight to intake - in ounces
+        format: float
+        type: number
+        x-go-name: OnceWeight
+      carbLevel:
+        $ref: '#/definitions/CarbLevel'
+      cupQuantity:
+        description: CupQuantity represents the amount that is allowed to intake in Cup(s)
+        format: float
+        type: number
+        x-go-name: CupQuantity
+      foodGroup:
+        $ref: '#/definitions/FoodGroup'
+      id:
+        description: ID is the database assigned id to the food item record
+        format: uint32
+        minimum: 1
+        type: integer
+        x-go-name: ID
+      name:
+        description: Name is the name of the food item
+        type: string
+        x-go-name: Name
+      variety:
+        $ref: '#/definitions/FoodVariety'
+    required:
+    - name
+    - cupQuantity
+    - GMWt
+    - OzWt
+    - carbLevel
+    type: object
+    x-go-package: github.com/garcialuis/Nutriport/api/models
+  FoodVariety:
+    description: |-
+      FoodVariety represents the variety for a food item
+      For example, a variety for a brocolli can be coocked from fresh or frozen
+    properties:
+      ID:
+        description: |-
+          ID is the database id assigned to the food group
+          This id is used to referece the variety from the food items table
+        format: uint16
+        minimum: 1
+        type: integer
+      variety:
+        description: |-
+          FoodVarietyName is a description of the variety
+          For example, a variety can be coocked from fresh or frozen
+        type: string
+        x-go-name: FoodVarietyName
+    required:
+    - ID
+    type: object
+    x-go-package: github.com/garcialuis/Nutriport/api/models
+info:
+  description: Documentation for Nutriport API
+  title: Nutriport API
+  version: 1.0.0
+paths:
+  /:
+    get:
+      operationId: Home
+      responses:
+        "200":
+          description: ' OK - Welcomes to Nutriport API'
+      tags:
+      - home
+  /fooditem:
+    get:
+      operationId: GetAllFoodItems
+      responses:
+        "200":
+          $ref: '#/responses/foodItemsResponse'
+        "422":
+          description: ' Unprocessable Entity'
+        "500":
+          description: ' Internal Server Error'
+      tags:
+      - foodItem
+    post:
+      operationId: CreateFoodItem
+      responses:
+        "201":
+          $ref: '#/responses/foodItemResponse'
+        "422":
+          description: ' Unprocessable Entity'
+        "500":
+          description: ' Internal Server Error'
+      tags:
+      - foodItem
+  /fooditem/{foodName}:
+    get:
+      operationId: GetFoodItemByName
+      responses:
+        "200":
+          $ref: '#/responses/foodItemResponse'
+        "422":
+          description: ' Unprocessable Entity'
+        "500":
+          description: ' Internal Server Error'
+      tags:
+      - foodItem
+produces:
+- application/json
+responses:
+  foodItemResponse:
+    description: A single food item record
+    schema:
+      $ref: '#/definitions/FoodItem'
+  foodItemsResponse:
+    description: A list of food items
+    schema:
+      items:
+        $ref: '#/definitions/FoodItem'
+      type: array
+schemes:
+- http
+swagger: "2.0"

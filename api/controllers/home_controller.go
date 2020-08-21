@@ -5,6 +5,10 @@ import (
 	"net/http"
 )
 
+// Home handler:
+// swagger:route GET / home Home
+// Responses:
+//	200: description: OK - Welcomes to Nutriport API
 func (server *Server) Home(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
