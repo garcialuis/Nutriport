@@ -8,62 +8,65 @@ import (
 )
 
 var carbohydrates = []models.CarbLevel{
-	models.CarbLevel{
+	{
 		Description: "lowest carbohydrate",
 	},
-	models.CarbLevel{
+	{
 		Description: "moderate carbohydrate",
 	},
-	models.CarbLevel{
+	{
 		Description: "highest carbohydrate",
 	},
 }
 
 var foodVarieties = []models.FoodVariety{
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Raw",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Coocked from frozen",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Coocked from frozen with skin",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Coocked from fresh",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Coocked from fresh with skin",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Coocked from canned",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Canned",
 	},
-	models.FoodVariety{
+	{
 		FoodVarietyName: "Not Applicable",
 	},
 }
 
 var foodGroups = []models.FoodGroup{
-	models.FoodGroup{
+	{
 		FoodGroupName: "Vegetables",
 	},
-	models.FoodGroup{
+	{
 		FoodGroupName: "Fuits",
 	},
-	models.FoodGroup{
+	{
 		FoodGroupName: "Grains",
 	},
-	models.FoodGroup{
+	{
 		FoodGroupName: "Protein",
 	},
-	models.FoodGroup{
+	{
 		FoodGroupName: "Dairy",
 	},
 }
 
+// Load takes care of dropping the database tables if the exist and creating new tables to seed the initial data in.
+// This function should only be used in development environments.
+// ** THIS IS NOT FOR PRODUCTION PURPOSES **
 func Load(db *gorm.DB) {
 
 	err := db.Debug().DropTableIfExists(&models.FoodItem{}, &models.CarbLevel{}, &models.FoodGroup{}, &models.FoodVariety{}).Error
