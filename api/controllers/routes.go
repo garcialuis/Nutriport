@@ -9,4 +9,5 @@ func (s *Server) InitializeRoutes() {
 	// FoodItems
 	s.Router.HandleFunc("/fooditem/{foodName}", middlewares.SetMiddlewareJSON(s.GetFoodItemByName)).Methods("GET")
 	s.Router.HandleFunc("/fooditem", middlewares.SetMiddlewareJSON(s.CreateFoodItem)).Methods("POST")
+	s.Router.HandleFunc("/fooditem", middlewares.SetMiddlewareJSON(s.GetAllFoodItems)).Methods("GET")
 }

@@ -59,3 +59,16 @@ func (server *Server) GetFoodItemByName(w http.ResponseWriter, r *http.Request) 
 
 	responses.JSON(w, http.StatusOK, itemFound)
 }
+
+func (server *Server) GetAllFoodItems(w http.ResponseWriter, r *http.Request) {
+
+	foodItem := models.FoodItem{}
+
+	foodItems, err := foodItem.SelectAll(server.DB)
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	responses.JSON(w, http.StatusOK, foodItems)
+}
