@@ -33,3 +33,12 @@ type foodItemsResponseWrapper struct {
 	// in: body
 	Body []models.FoodItem
 }
+
+// foodName is the name of the food
+// swagger:parameters GetFoodItemByName
+type foodNameParamWrapper struct {
+	// The name of a food item
+	// in: path
+	// required: true
+	FoodName string `json:"foodName"`
+}
