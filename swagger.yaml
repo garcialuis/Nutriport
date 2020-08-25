@@ -162,6 +162,13 @@ paths:
   /fooditem/{foodName}:
     get:
       operationId: GetFoodItemByName
+      parameters:
+      - description: The name of a food item
+        in: path
+        name: foodName
+        required: true
+        type: string
+        x-go-name: FoodName
       responses:
         "200":
           $ref: '#/responses/foodItemResponse'
