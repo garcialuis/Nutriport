@@ -9,6 +9,7 @@ import (
 	"github.com/garcialuis/Nutriport/api/controllers"
 	"github.com/garcialuis/Nutriport/client/client"
 	"github.com/garcialuis/Nutriport/sdk/client/fooditem"
+	"github.com/garcialuis/Nutriport/sdk/models"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 )
@@ -95,4 +96,30 @@ func TestGetAllFoodItems(t *testing.T) {
 	for _, foodItem := range foodItems {
 		fmt.Println(foodItem)
 	}
+}
+
+func TestCreateFoodItem(t *testing.T) {
+
+	foodItemClient := fooditem.NewClientService()
+
+	itemName := "Strawberries"
+	var cupQtty float32 = 1
+	var gWt float32 = 141.74
+	var oWt float32 = 5
+
+	foodItemToCreate := models.FoodItem{
+		Name:          itemName,
+		CarbLevelID:   2,
+		FoodVarietyID: 1,
+		FoodGroupID:   2,
+		CupQuantity:   cupQtty,
+		GramWeight:    gWt,
+		OnceWeight:    oWt,
+	}
+
+	newFoodItem := foodItemClient.CreateFoodItem(foodItemToCreate)
+
+	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
+	fmt.Println(newFoodItem)
+
 }

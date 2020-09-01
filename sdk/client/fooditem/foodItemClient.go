@@ -18,7 +18,7 @@ func NewClientService() *ClientService {
 	return &ClientService{}
 }
 
-func (service *ClientService) CreateFoodItem(foodItem *models.FoodItem) models.FoodItem {
+func (service *ClientService) CreateFoodItem(foodItem models.FoodItem) models.FoodItem {
 
 	jsonBody, err := json.Marshal(foodItem)
 	if err != nil {
@@ -27,7 +27,7 @@ func (service *ClientService) CreateFoodItem(foodItem *models.FoodItem) models.F
 
 	requestBody := bytes.NewReader(jsonBody)
 
-	resp, err := http.Post("", "application/json", requestBody)
+	resp, err := http.Post("http://localhost:8085/fooditem", "application/json", requestBody)
 
 	if err != nil {
 		//
@@ -75,7 +75,7 @@ func (service *ClientService) GetFoodItemByName(foodItemName string) models.Food
 
 	foodItem := models.FoodItem{}
 
-	base, err := url.Parse("")
+	base, err := url.Parse("http://localhost:8085/fooditem/")
 	if err != nil {
 
 	}
