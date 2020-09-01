@@ -8,6 +8,7 @@ import (
 
 	"github.com/garcialuis/Nutriport/api/controllers"
 	"github.com/garcialuis/Nutriport/client/client"
+	"github.com/garcialuis/Nutriport/sdk/client/fooditem"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 )
@@ -83,4 +84,15 @@ func TestGetFoodItems(t *testing.T) {
 
 	foodItemsPayload := foodItems.GetPayload()
 	fmt.Printf("Name: %#v, FoodGroup: %v\n", *foodItemsPayload[0].Name, foodItemsPayload[0].FoodGroup.FoodGroupName)
+}
+
+func TestGetAllFoodItems(t *testing.T) {
+
+	foodItemClient := fooditem.NewClientService()
+
+	foodItems := foodItemClient.GetAllFoodItems()
+
+	for _, foodItem := range foodItems {
+		fmt.Println(foodItem)
+	}
 }
