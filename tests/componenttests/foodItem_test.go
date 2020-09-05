@@ -29,7 +29,7 @@ func Database() {
 	TestDbDriver := os.Getenv("DB_POSTGRES_DRIVER")
 
 	if TestDbDriver == "postgres" {
-		DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", os.Getenv("TEST_DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("TEST_DB_USER"), "nutriport", os.Getenv("TEST_DB_PASSWORD"))
+		DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", os.Getenv("TEST_DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("TEST_DB_USER"), os.Getenv("NUTRIPORT_TEST_DB"), os.Getenv("TEST_DB_PASSWORD"))
 		server.DB, err = gorm.Open(TestDbDriver, DBURL)
 
 		if err != nil {
