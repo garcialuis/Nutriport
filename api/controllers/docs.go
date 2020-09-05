@@ -35,7 +35,7 @@ type foodItemsResponseWrapper struct {
 }
 
 // foodName is the name of the food
-// swagger:parameters GetFoodItemByName
+// swagger:parameters GetFoodItemByName DeleteFoodItemByName
 type foodNameParamWrapper struct {
 	// The name of a food item
 	// in: path

@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
@@ -117,4 +118,19 @@ func (item *FoodItem) SelectAll(db *gorm.DB) (*[]FoodItem, error) {
 	}
 
 	return &foodItems, nil
+}
+
+// DeleteItem is to be used to remove an item from the food_items table with a specified name
+func (item *FoodItem) DeleteItem(db *gorm.DB, foodName string) (int64, error) {
+
+	db = db.Debug().Model(&FoodItem{}).Where("name = ?", foodName).Take(&FoodItem{}).Delete(&FoodItem{})
+
+	if db.Error != nil {
+		if gorm.IsRecordNotFoundError(db.Error) {
+			return 0, errors.New("FoodItem specified not found")
+		}
+		return 0, db.Error
+	}
+
+	return db.RowsAffected, nil
 }

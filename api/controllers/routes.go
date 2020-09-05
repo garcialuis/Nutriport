@@ -15,6 +15,7 @@ func (s *Server) InitializeRoutes() {
 	s.Router.HandleFunc("/fooditem/{foodName}", middlewares.SetMiddlewareJSON(s.GetFoodItemByName)).Methods("GET")
 	s.Router.HandleFunc("/fooditem", middlewares.SetMiddlewareJSON(s.CreateFoodItem)).Methods("POST")
 	s.Router.HandleFunc("/fooditem", middlewares.SetMiddlewareJSON(s.GetAllFoodItems)).Methods("GET")
+	s.Router.HandleFunc("/fooditem/{foodName}", middlewares.SetMiddlewareJSON(s.DeleteFoodItemByName)).Methods("DELETE")
 
 	// Swagger Docs:
 	opts := middleware.RedocOpts{SpecURL: "../../swagger.yaml"}
