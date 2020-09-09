@@ -11,4 +11,5 @@ require (
 	github.com/gorilla/mux v1.7.4
 	github.com/jinzhu/gorm v1.9.16
 	github.com/stretchr/testify v1.6.1
+	gopkg.in/go-playground/assert.v1 v1.2.1
 )

@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/garcialuis/Nutriport/api/controllers"
 	"github.com/garcialuis/Nutriport/client/client"
@@ -12,6 +13,7 @@ import (
 	"github.com/garcialuis/Nutriport/sdk/models"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"gopkg.in/go-playground/assert.v1"
 )
 
 var server = controllers.Server{}
@@ -58,6 +60,8 @@ func StartServer() {
 
 func TestNutriportClient(t *testing.T) {
 
+	time.Sleep(2 * time.Second)
+
 	cfg := client.DefaultTransportConfig().WithHost("localhost:8085")
 	c := client.NewHTTPClientWithConfig(nil, cfg)
 
@@ -102,7 +106,7 @@ func TestCreateFoodItem(t *testing.T) {
 
 	foodItemClient := fooditem.NewClientService()
 
-	itemName := "Strawberries"
+	itemName := "Cucumber"
 	var cupQtty float32 = 1
 	var gWt float32 = 141.74
 	var oWt float32 = 5
@@ -122,4 +126,15 @@ func TestCreateFoodItem(t *testing.T) {
 	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
 	fmt.Println(newFoodItem)
 
+}
+
+func TestDeleteFoodItem(t *testing.T) {
+
+	foodItemClient := fooditem.NewClientService()
+
+	foodItemName := "Cucumber"
+	affectedRecords := foodItemClient.DeleteFoodItem(foodItemName)
+	fmt.Println("Affected Records: ", affectedRecords)
+
+	assert.Equal(t, 1, affectedRecords)
 }
