@@ -4,7 +4,7 @@ consumes:
 definitions:
   CarbLevel:
     description: |-
-      CarbLevel is a numeric rank representation of the carbohydrates present in the food item
+      CarbLevel CarbLevel is a numeric rank representation of the carbohydrates present in the food item
       The higher the level, the more carbohydrates the item has.
     properties:
       description:
@@ -20,10 +20,10 @@ definitions:
     required:
     - id
     type: object
-    x-go-package: github.com/garcialuis/Nutriport/api/models
+    x-go-package: github.com/garcialuis/Nutriport/client/models
   FoodGroup:
     description: |-
-      FoodGroup identifies the food group that a food item belongs to
+      FoodGroup FoodGroup identifies the food group that a food item belongs to
       Food groups can be: fruit, dairy, protein, etc...
     properties:
       foodGroupName:
@@ -42,7 +42,7 @@ definitions:
     required:
     - id
     type: object
-    x-go-package: github.com/garcialuis/Nutriport/api/models
+    x-go-package: github.com/garcialuis/Nutriport/client/models
   FoodItem:
     description: |-
       FoodItem is the model that contains all information about an item
@@ -94,9 +94,9 @@ definitions:
       variety:
         $ref: '#/definitions/FoodVariety'
     required:
-    - name
     - cupQuantity
     - GMWt
+    - name
     - OzWt
     - carbLevel
     type: object
@@ -160,8 +160,33 @@ paths:
       tags:
       - foodItem
   /fooditem/{foodName}:
+    delete:
+      operationId: DeleteFoodItemByName
+      parameters:
+      - description: The name of a food item
+        in: path
+        name: foodName
+        required: true
+        type: string
+        x-go-name: FoodName
+      responses:
+        "204":
+          description: ' No Content'
+        "400":
+          description: ' Bad Request'
+        "404":
+          description: ' FoodItem Not Found'
+      tags:
+      - foodItem
     get:
       operationId: GetFoodItemByName
+      parameters:
+      - description: The name of a food item
+        in: path
+        name: foodName
+        required: true
+        type: string
+        x-go-name: FoodName
       responses:
         "200":
           $ref: '#/responses/foodItemResponse'

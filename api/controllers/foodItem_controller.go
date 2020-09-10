@@ -93,3 +93,27 @@ func (server *Server) GetAllFoodItems(w http.ResponseWriter, r *http.Request) {
 
 	responses.JSON(w, http.StatusOK, foodItems)
 }
+
+// DeleteFoodItemByName Handler:
+// swagger:route DELETE /fooditem/{foodName} foodItem DeleteFoodItemByName
+//
+// Responses:
+//		204: description: No Content
+//		400: description: Bad Request
+//		404: description: FoodItem Not Found
+func (server *Server) DeleteFoodItemByName(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	foodItemName := vars["foodName"]
+
+	foodItem := models.FoodItem{}
+
+	_, err := foodItem.DeleteItem(server.DB, foodItemName)
+	if err != nil {
+		responses.ERROR(w, http.StatusBadRequest, err)
+		return
+	}
+
+	w.Header().Set("Entity", foodItemName)
+	responses.JSON(w, http.StatusNoContent, "")
+}
