@@ -1,4 +1,4 @@
-package client
+package bmi
 
 import (
 	"encoding/json"
@@ -40,7 +40,7 @@ func (service *BMIClientService) CalculateImperialBMI(weight, height float64) mo
 	resp, err := client.Do(req)
 
 	if err != nil {
-		log.Println("Error sending request to server")
+		log.Println("Error sending request to server", err.Error())
 		return models.Person{}
 	}
 

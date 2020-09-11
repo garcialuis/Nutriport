@@ -112,6 +112,7 @@ func (server *Server) GetImperialBMI(w http.ResponseWriter, r *http.Request) {
 func calculateMetricBMI(weight, height float64) (bmi float64, bmiDescription string) {
 
 	bmi = weight / math.Pow(height, 2)
+	bmi = math.Round(bmi*10) / 10
 	bmiDescription = getBMIDescription(bmi)
 
 	return bmi, bmiDescription
@@ -120,6 +121,7 @@ func calculateMetricBMI(weight, height float64) (bmi float64, bmiDescription str
 func calculateImperialBMI(weight, height float64) (bmi float64, bmiDescription string) {
 
 	bmi = 703 * weight / math.Pow(height, 2)
+	bmi = math.Round(bmi*10) / 10
 	bmiDescription = getBMIDescription(bmi)
 
 	return bmi, bmiDescription
