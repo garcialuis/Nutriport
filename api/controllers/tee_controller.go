@@ -1,5 +1,12 @@
 package controllers
 
+import (
+	"errors"
+	"net/http"
+
+	"github.com/garcialuis/Nutriport/api/responses"
+)
+
 // TEE = RMR x activity factor
 
 /*
@@ -65,11 +72,56 @@ var activityLevels = map[string][2]float64{
 	"extremely active":  {1.4, 1.2},
 }
 
-func GetActivityLevel(activityLevel string, gender int) float64 {
+func (server *Server) GetTotalEnergyExpenditure(w http.ResponseWriter, r *http.Request) {
+
+	vars := r.URL.Query()
+
+	activityLevelParams, ok := vars["activitylevel"]
+
+	if !ok || len(activityLevelParams[0]) < 1 {
+		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Url Param 'height' is missing"))
+		return
+	}
+
+	activityLevel := activityLevelParams[0]
+
+	// personInfo := models.Person{
+	// 	Height: height,
+	// 	Weight: weight,
+	// }
+
+	tee := calculateTEE(25, 0, 143, activityLevel)
+
+	responses.JSON(w, http.StatusOK, tee)
+
+	// responses.JSON(w, http.StatusOK, personInfo)
+}
+
+func calculateTEE(age int, gender int, weight float64, activityLevel string) (tee float64) {
+
+	rmr := getRestingMetabollicRate(age, gender, weight)
+	activityLevelFactor := activityLevels[activityLevel][gender]
+
+	tee = rmr * activityLevelFactor
+
+	return tee
+}
+
+func getRestingMetabollicRate(age int, gender int, weight float64) (rmr float64) {
+
+	rmrIndex := getRMRPairIndex(age, gender)
+	factor, addend := getRMRValues(rmrIndex)
+
+	rmr = (factor * weight) + addend
+
+	return rmr
+}
+
+func getActivityLevel(activityLevel string, gender int) float64 {
 	return activityLevels[activityLevel][gender]
 }
 
-func GetRMRPairIndex(age int, gender int) (pairIndex int) {
+func getRMRPairIndex(age int, gender int) (pairIndex int) {
 
 	if age < 3 {
 		pairIndex = 0
@@ -90,7 +142,7 @@ func GetRMRPairIndex(age int, gender int) (pairIndex int) {
 	return pairIndex
 }
 
-func GetRMRValues(index int) (factor float64, addends float64) {
+func getRMRValues(index int) (factor float64, addends float64) {
 
 	rmrEquationValues := rmrValues[index]
 
