@@ -2,8 +2,11 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
+	"strconv"
 
+	"github.com/garcialuis/Nutriport/api/models"
 	"github.com/garcialuis/Nutriport/api/responses"
 )
 
@@ -76,25 +79,67 @@ func (server *Server) GetTotalEnergyExpenditure(w http.ResponseWriter, r *http.R
 
 	vars := r.URL.Query()
 
+	ageParams, ok := vars["age"]
+
+	if !ok || len(ageParams[0]) < 1 {
+		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Url Param 'age' is missing"))
+		return
+	}
+
+	genderParams, ok := vars["gender"]
+
+	if !ok || len(genderParams[0]) < 1 {
+		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Url Param 'gender' is missing"))
+		return
+	}
+
+	weightParams, ok := vars["weight"]
+
+	if !ok || len(weightParams[0]) < 1 {
+		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Url Param 'weight' is missing"))
+		return
+	}
+
 	activityLevelParams, ok := vars["activitylevel"]
 
 	if !ok || len(activityLevelParams[0]) < 1 {
-		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Url Param 'height' is missing"))
+		responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Url Param 'activitylevel' is missing"))
+		return
+	}
+
+	age, err := strconv.Atoi(ageParams[0])
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+
+	gender, err := strconv.Atoi(genderParams[0])
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+
+	weight, err := strconv.ParseFloat(weightParams[0], 64)
+	if err != nil {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 
 	activityLevel := activityLevelParams[0]
 
-	// personInfo := models.Person{
-	// 	Height: height,
-	// 	Weight: weight,
-	// }
+	personInfo := models.Person{
+		Age:           uint(age),
+		Gender:        uint(gender),
+		Weight:        weight,
+		ActivityLevel: activityLevel,
+	}
 
-	tee := calculateTEE(25, 0, 143, activityLevel)
+	fmt.Println(personInfo)
 
-	responses.JSON(w, http.StatusOK, tee)
+	tee := calculateTEE(age, gender, weight, activityLevel)
+	personInfo.TEE = tee
 
-	// responses.JSON(w, http.StatusOK, personInfo)
+	responses.JSON(w, http.StatusOK, personInfo)
 }
 
 func calculateTEE(age int, gender int, weight float64, activityLevel string) (tee float64) {
