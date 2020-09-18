@@ -21,6 +21,9 @@ func (s *Server) InitializeRoutes() {
 	s.Router.HandleFunc("/metric/bmi", middlewares.SetMiddlewareJSON(s.GetMetricBMI)).Methods("GET")
 	s.Router.HandleFunc("/imperial/bmi", middlewares.SetMiddlewareJSON(s.GetImperialBMI)).Methods("GET")
 
+	// TEE
+	s.Router.HandleFunc("/tee", middlewares.SetMiddlewareJSON(s.GetTotalEnergyExpenditure)).Methods("GET")
+
 	// Swagger Docs:
 	opts := middleware.RedocOpts{SpecURL: "../../swagger.yaml"}
 	sh := middleware.Redoc(opts, nil)

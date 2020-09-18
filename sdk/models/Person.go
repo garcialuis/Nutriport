@@ -8,4 +8,5 @@ type Person struct {
 	BMI            float64 `json:"BMI,omitempty"`
 	BMIDescription string  `json:"BMIDescription,omitempty"`
 	TEE            float64 `json:"TEE,omitempty"`
+	ActivityLevel  string  `json:"activityLevel,omitempty"`
 }
