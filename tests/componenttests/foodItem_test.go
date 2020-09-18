@@ -9,7 +9,7 @@ import (
 
 	"github.com/garcialuis/Nutriport/api/controllers"
 	"github.com/garcialuis/Nutriport/client/client"
-	"github.com/garcialuis/Nutriport/sdk/client/fooditem"
+	nutriportclient "github.com/garcialuis/Nutriport/sdk/client"
 	"github.com/garcialuis/Nutriport/sdk/models"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
@@ -93,9 +93,9 @@ func TestGetFoodItems(t *testing.T) {
 
 func TestGetAllFoodItems(t *testing.T) {
 
-	foodItemClient := fooditem.NewClientService()
+	nutriportClient := nutriportclient.NewClient()
 
-	foodItems := foodItemClient.GetAllFoodItems()
+	foodItems := nutriportClient.GetAllFoodItems()
 
 	for _, foodItem := range foodItems {
 		fmt.Println(foodItem)
@@ -104,7 +104,7 @@ func TestGetAllFoodItems(t *testing.T) {
 
 func TestCreateFoodItem(t *testing.T) {
 
-	foodItemClient := fooditem.NewClientService()
+	nutriportClient := nutriportclient.NewClient()
 
 	itemName := "Cucumber"
 	var cupQtty float32 = 1
@@ -121,7 +121,7 @@ func TestCreateFoodItem(t *testing.T) {
 		OnceWeight:    oWt,
 	}
 
-	newFoodItem := foodItemClient.CreateFoodItem(foodItemToCreate)
+	newFoodItem := nutriportClient.CreateFoodItem(foodItemToCreate)
 
 	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
 	fmt.Println(newFoodItem)
@@ -130,10 +130,10 @@ func TestCreateFoodItem(t *testing.T) {
 
 func TestDeleteFoodItem(t *testing.T) {
 
-	foodItemClient := fooditem.NewClientService()
+	nutriportClient := nutriportclient.NewClient()
 
 	foodItemName := "Cucumber"
-	affectedRecords := foodItemClient.DeleteFoodItem(foodItemName)
+	affectedRecords := nutriportClient.DeleteFoodItem(foodItemName)
 	fmt.Println("Affected Records: ", affectedRecords)
 
 	assert.Equal(t, 1, affectedRecords)
