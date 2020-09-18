@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/garcialuis/Nutriport/sdk/models"
 )
@@ -22,8 +23,8 @@ func (service *ClientService) CalculateTotalEnergyExpenditure(age int, gender in
 	personInfo := models.Person{}
 	client := &http.Client{}
 
-	ageStr := fmt.Sprintf("%f", age)
-	genderStr := fmt.Sprintf("%f", gender)
+	ageStr := strconv.Itoa(age)
+	genderStr := strconv.Itoa(gender)
 	weightStr := fmt.Sprintf("%f", weight)
 
 	req, err := http.NewRequest("GET", "http://localhost:8085/tee", nil)
