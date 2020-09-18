@@ -3,6 +3,7 @@ package controllers
 import (
 	"errors"
 	"fmt"
+	"math"
 	"net/http"
 	"strconv"
 
@@ -148,6 +149,7 @@ func calculateTEE(age int, gender int, weight float64, activityLevel string) (te
 	activityLevelFactor := activityLevels[activityLevel][gender]
 
 	tee = rmr * activityLevelFactor
+	tee = math.Round(tee*100) / 100
 
 	return tee
 }
