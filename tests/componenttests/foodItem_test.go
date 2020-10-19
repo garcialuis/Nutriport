@@ -76,6 +76,8 @@ func TestNutriportClient(t *testing.T) {
 
 func TestCreateFoodItem(t *testing.T) {
 
+	time.Sleep(2 * time.Second)
+
 	nutriportClient := nutriportclient.NewClient()
 
 	itemName := "Cucumber"

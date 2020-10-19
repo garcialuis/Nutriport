@@ -33,6 +33,10 @@ func (server *Server) CreateFoodItem(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 	}
 
+	fmt.Println("\n--------------------------------\nServer: ")
+	fmt.Println(&server)
+	fmt.Println("\n--------------------------------")
+
 	foodItemCreated, err := foodItem.SaveFoodItem(server.DB)
 
 	if err != nil {
