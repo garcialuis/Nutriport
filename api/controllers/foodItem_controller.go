@@ -41,6 +41,8 @@ func (server *Server) CreateFoodItem(w http.ResponseWriter, r *http.Request) {
 
 	foodItemCreated, err := foodItem.SaveFoodItem(server.DB)
 
+	fmt.Println("Food Item saved into DB")
+
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
