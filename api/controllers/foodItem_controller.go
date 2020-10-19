@@ -35,6 +35,8 @@ func (server *Server) CreateFoodItem(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("\n--------------------------------\nServer: ")
 	fmt.Println(&server)
+	fmt.Println(&server.DB)
+	fmt.Println(&server.Router)
 	fmt.Println("\n--------------------------------")
 
 	foodItemCreated, err := foodItem.SaveFoodItem(server.DB)
