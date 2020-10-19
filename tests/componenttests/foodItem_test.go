@@ -74,6 +74,32 @@ func TestNutriportClient(t *testing.T) {
 	fmt.Printf("homeOk: %v\n", homeOk)
 }
 
+func TestCreateFoodItem(t *testing.T) {
+
+	nutriportClient := nutriportclient.NewClient()
+
+	itemName := "Cucumber"
+	var cupQtty float32 = 1
+	var gWt float32 = 141.74
+	var oWt float32 = 5
+
+	foodItemToCreate := models.FoodItem{
+		Name:          itemName,
+		CarbLevelID:   2,
+		FoodVarietyID: 1,
+		FoodGroupID:   2,
+		CupQuantity:   cupQtty,
+		GramWeight:    gWt,
+		OnceWeight:    oWt,
+	}
+
+	newFoodItem := nutriportClient.CreateFoodItem(foodItemToCreate)
+
+	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
+	fmt.Println(newFoodItem)
+
+}
+
 func TestGetFoodItems(t *testing.T) {
 
 	// TODO: Seed test database with expected records
@@ -100,32 +126,6 @@ func TestGetAllFoodItems(t *testing.T) {
 	for _, foodItem := range foodItems {
 		fmt.Println(foodItem)
 	}
-}
-
-func TestCreateFoodItem(t *testing.T) {
-
-	nutriportClient := nutriportclient.NewClient()
-
-	itemName := "Cucumber"
-	var cupQtty float32 = 1
-	var gWt float32 = 141.74
-	var oWt float32 = 5
-
-	foodItemToCreate := models.FoodItem{
-		Name:          itemName,
-		CarbLevelID:   2,
-		FoodVarietyID: 1,
-		FoodGroupID:   2,
-		CupQuantity:   cupQtty,
-		GramWeight:    gWt,
-		OnceWeight:    oWt,
-	}
-
-	newFoodItem := nutriportClient.CreateFoodItem(foodItemToCreate)
-
-	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
-	fmt.Println(newFoodItem)
-
 }
 
 func TestDeleteFoodItem(t *testing.T) {
