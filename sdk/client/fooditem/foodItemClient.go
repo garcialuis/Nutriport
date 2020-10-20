@@ -142,9 +142,13 @@ func (service *ClientService) DeleteFoodItem(foodItemName string) int {
 
 	// Display Results
 	fmt.Println("Response Status :", resp.Status)
-	fmt.Println("Response Headers : ", resp.Header)
-	fmt.Println("Response Body : ", string(respBody))
 
-	// TODO: Return records affected
+	statusCode := resp.StatusCode
+
+	if statusCode != http.StatusNoContent {
+		fmt.Println("Response Body : ", string(respBody))
+		return 0
+	}
+
 	return 1
 }

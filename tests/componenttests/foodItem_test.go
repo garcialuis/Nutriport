@@ -139,7 +139,16 @@ func TestDeleteFoodItem(t *testing.T) {
 
 	foodItemName := "Cucumber"
 	affectedRecords := nutriportClient.DeleteFoodItem(foodItemName)
-	fmt.Println("Affected Records: ", affectedRecords)
 
 	assert.Equal(t, 1, affectedRecords)
+}
+
+func TestDeleteNonexistentFoodItem(t *testing.T) {
+
+	nutriportClient := nutriportclient.NewClient()
+
+	foodItemName := "Skinny Cake"
+	affectedRecords := nutriportClient.DeleteFoodItem(foodItemName)
+
+	assert.Equal(t, 0, affectedRecords)
 }
