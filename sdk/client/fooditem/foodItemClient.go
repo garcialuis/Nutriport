@@ -23,7 +23,8 @@ func (service *ClientService) CreateFoodItem(foodItem models.FoodItem) models.Fo
 
 	jsonBody, err := json.Marshal(foodItem)
 	if err != nil {
-		// Unable to marshall input
+		log.Println("Error creating foodItem, cannot marshal input: ", err.Error())
+		return models.FoodItem{}
 	}
 
 	requestBody := bytes.NewReader(jsonBody)
@@ -31,7 +32,8 @@ func (service *ClientService) CreateFoodItem(foodItem models.FoodItem) models.Fo
 	resp, err := http.Post("http://localhost:8085/fooditem", "application/json", requestBody)
 
 	if err != nil {
-		//
+		log.Println("Unable to complete request due to: ", err.Error())
+		return models.FoodItem{}
 	}
 
 	defer resp.Body.Close()
@@ -78,14 +80,16 @@ func (service *ClientService) GetFoodItemByName(foodItemName string) models.Food
 
 	base, err := url.Parse("http://localhost:8085/fooditem/")
 	if err != nil {
-
+		log.Println("Unable to complete request due to: ", err.Error())
+		return foodItem
 	}
 
 	base.Path += foodItemName
 
 	resp, err := http.Get(base.String())
 	if err != nil {
-
+		log.Println("Unable to complete request due to: ", err.Error())
+		return foodItem
 	}
 
 	defer resp.Body.Close()
@@ -97,7 +101,8 @@ func (service *ClientService) GetFoodItemByName(foodItemName string) models.Food
 
 	err = json.Unmarshal(body, &foodItem)
 	if err != nil {
-
+		log.Println("Unable to unmarshall data retrieved, ", err.Error())
+		return foodItem
 	}
 
 	return foodItem
