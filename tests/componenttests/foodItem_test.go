@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/garcialuis/Nutriport/api/controllers"
+	"github.com/garcialuis/Nutriport/api/seed"
 	"github.com/garcialuis/Nutriport/client/client"
 	nutriportclient "github.com/garcialuis/Nutriport/sdk/client"
 	"github.com/garcialuis/Nutriport/sdk/models"
@@ -19,7 +20,6 @@ import (
 var server = controllers.Server{}
 
 func TestMain(m *testing.M) {
-	fmt.Println("Testing main T test first")
 	Database()
 	StartServer()
 	os.Exit(m.Run())
@@ -41,6 +41,9 @@ func Database() {
 			fmt.Printf("We are connected to the %s database\n", TestDbDriver)
 		}
 	}
+
+	fmt.Println("Seeding test db:")
+	seed.Load(server.DB)
 }
 
 func StartServer() {
