@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/garcialuis/Nutriport/api/controllers"
+	"github.com/garcialuis/Nutriport/api/seed"
 	"github.com/garcialuis/Nutriport/client/client"
 	nutriportclient "github.com/garcialuis/Nutriport/sdk/client"
 	"github.com/garcialuis/Nutriport/sdk/models"
@@ -19,7 +20,6 @@ import (
 var server = controllers.Server{}
 
 func TestMain(m *testing.M) {
-	fmt.Println("Testing main T test first")
 	Database()
 	StartServer()
 	os.Exit(m.Run())
@@ -41,6 +41,9 @@ func Database() {
 			fmt.Printf("We are connected to the %s database\n", TestDbDriver)
 		}
 	}
+
+	fmt.Println("Seeding test db:")
+	seed.Load(server.DB)
 }
 
 func StartServer() {
@@ -74,6 +77,34 @@ func TestNutriportClient(t *testing.T) {
 	fmt.Printf("homeOk: %v\n", homeOk)
 }
 
+func TestCreateFoodItem(t *testing.T) {
+
+	time.Sleep(2 * time.Second)
+
+	nutriportClient := nutriportclient.NewClient()
+
+	itemName := "Cucumber"
+	var cupQtty float32 = 1
+	var gWt float32 = 141.74
+	var oWt float32 = 5
+
+	foodItemToCreate := models.FoodItem{
+		Name:          itemName,
+		CarbLevelID:   2,
+		FoodVarietyID: 1,
+		FoodGroupID:   2,
+		CupQuantity:   cupQtty,
+		GramWeight:    gWt,
+		OnceWeight:    oWt,
+	}
+
+	newFoodItem := nutriportClient.CreateFoodItem(foodItemToCreate)
+
+	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
+	fmt.Println(newFoodItem)
+
+}
+
 func TestGetFoodItems(t *testing.T) {
 
 	// TODO: Seed test database with expected records
@@ -100,32 +131,6 @@ func TestGetAllFoodItems(t *testing.T) {
 	for _, foodItem := range foodItems {
 		fmt.Println(foodItem)
 	}
-}
-
-func TestCreateFoodItem(t *testing.T) {
-
-	nutriportClient := nutriportclient.NewClient()
-
-	itemName := "Cucumber"
-	var cupQtty float32 = 1
-	var gWt float32 = 141.74
-	var oWt float32 = 5
-
-	foodItemToCreate := models.FoodItem{
-		Name:          itemName,
-		CarbLevelID:   2,
-		FoodVarietyID: 1,
-		FoodGroupID:   2,
-		CupQuantity:   cupQtty,
-		GramWeight:    gWt,
-		OnceWeight:    oWt,
-	}
-
-	newFoodItem := nutriportClient.CreateFoodItem(foodItemToCreate)
-
-	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
-	fmt.Println(newFoodItem)
-
 }
 
 func TestDeleteFoodItem(t *testing.T) {
