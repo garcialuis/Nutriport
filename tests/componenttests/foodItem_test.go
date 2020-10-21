@@ -79,8 +79,6 @@ func TestNutriportClient(t *testing.T) {
 
 func TestCreateFoodItem(t *testing.T) {
 
-	time.Sleep(2 * time.Second)
-
 	nutriportClient := nutriportclient.NewClient()
 
 	itemName := "Cucumber"
@@ -92,7 +90,7 @@ func TestCreateFoodItem(t *testing.T) {
 		Name:          itemName,
 		CarbLevelID:   2,
 		FoodVarietyID: 1,
-		FoodGroupID:   2,
+		FoodGroupID:   1,
 		CupQuantity:   cupQtty,
 		GramWeight:    gWt,
 		OnceWeight:    oWt,
@@ -100,14 +98,15 @@ func TestCreateFoodItem(t *testing.T) {
 
 	newFoodItem := nutriportClient.CreateFoodItem(foodItemToCreate)
 
-	fmt.Println("NEW FOOD ITEM CREATED USING CLIENT: ")
-	fmt.Println(newFoodItem)
+	// Using two values assigned by db when item was created,
+	// everything else should be the same:
+	foodItemToCreate.ID = newFoodItem.ID
+	foodItemToCreate.Variety = newFoodItem.Variety
 
+	assert.Equal(t, foodItemToCreate, newFoodItem)
 }
 
 func TestGetFoodItems(t *testing.T) {
-
-	// TODO: Seed test database with expected records
 
 	cfg := client.DefaultTransportConfig().WithHost("localhost:8085")
 	c := client.NewHTTPClientWithConfig(nil, cfg)
@@ -120,6 +119,9 @@ func TestGetFoodItems(t *testing.T) {
 
 	foodItemsPayload := foodItems.GetPayload()
 	fmt.Printf("Name: %#v, FoodGroup: %v\n", *foodItemsPayload[0].Name, foodItemsPayload[0].FoodGroup.FoodGroupName)
+	assert.Equal(t, "Cucumber", *foodItemsPayload[0].Name)
+	assert.Equal(t, "Raw", foodItemsPayload[0].Variety.FoodVarietyName)
+	assert.Equal(t, "Vegetables", foodItemsPayload[0].FoodGroup.FoodGroupName)
 }
 
 func TestGetAllFoodItems(t *testing.T) {
@@ -128,9 +130,7 @@ func TestGetAllFoodItems(t *testing.T) {
 
 	foodItems := nutriportClient.GetAllFoodItems()
 
-	for _, foodItem := range foodItems {
-		fmt.Println(foodItem)
-	}
+	assert.Equal(t, 1, len(foodItems))
 }
 
 func TestDeleteFoodItem(t *testing.T) {
