@@ -11,10 +11,13 @@ import (
 	"github.com/garcialuis/Nutriport/sdk/models"
 )
 
+var hostUrl string
+
 type BMIClientService struct {
 }
 
 func NewBMIService() *BMIClientService {
+	initBMIServiceUrl()
 	return &BMIClientService{}
 }
 
@@ -26,7 +29,8 @@ func (service *BMIClientService) CalculateImperialBMI(weight, height float64) mo
 	weightStr := fmt.Sprintf("%f", weight)
 	heightStr := fmt.Sprintf("%f", height)
 
-	req, err := http.NewRequest("GET", "http://localhost:8085/imperial/bmi", nil)
+	url := fmt.Sprint(hostUrl, "imperial/bmi")
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Print(err)
 		os.Exit(1)
@@ -53,4 +57,11 @@ func (service *BMIClientService) CalculateImperialBMI(weight, height float64) mo
 	}
 
 	return personInfo
+}
+
+func initBMIServiceUrl() {
+	hostUrl = os.Getenv("NUTRIPORT_SERVICE_URL")
+	if len(hostUrl) == 0 {
+		hostUrl = "http://localhost:8085/"
+	}
 }

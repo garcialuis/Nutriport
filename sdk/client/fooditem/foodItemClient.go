@@ -8,14 +8,18 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 
 	"github.com/garcialuis/Nutriport/sdk/models"
 )
+
+var hostUrl string
 
 type ClientService struct {
 }
 
 func NewClientService() *ClientService {
+	initFoodItemServiceUrl()
 	return &ClientService{}
 }
 
@@ -29,7 +33,8 @@ func (service *ClientService) CreateFoodItem(foodItem models.FoodItem) models.Fo
 
 	requestBody := bytes.NewReader(jsonBody)
 
-	resp, err := http.Post("http://localhost:8085/fooditem", "application/json", requestBody)
+	url := fmt.Sprint(hostUrl, "fooditem")
+	resp, err := http.Post(url, "application/json", requestBody)
 
 	if err != nil {
 		log.Println("Unable to complete request due to: ", err.Error())
@@ -54,7 +59,8 @@ func (service *ClientService) GetAllFoodItems() []models.FoodItem {
 
 	foodItems := []models.FoodItem{}
 
-	resp, err := http.Get("http://localhost:8085/fooditem")
+	url := fmt.Sprint(hostUrl, "fooditem")
+	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -78,7 +84,8 @@ func (service *ClientService) GetFoodItemByName(foodItemName string) models.Food
 
 	foodItem := models.FoodItem{}
 
-	base, err := url.Parse("http://localhost:8085/fooditem/")
+	reqUrl := fmt.Sprint(hostUrl, "fooditem/")
+	base, err := url.Parse(reqUrl)
 	if err != nil {
 		log.Println("Unable to complete request due to: ", err.Error())
 		return foodItem
@@ -113,7 +120,8 @@ func (service *ClientService) DeleteFoodItem(foodItemName string) int {
 	client := &http.Client{}
 
 	// foodItem := models.FoodItem{}
-	base, err := url.Parse("http://localhost:8085/fooditem/")
+	reqUrl := fmt.Sprint(hostUrl, "fooditem/")
+	base, err := url.Parse(reqUrl)
 	if err != nil {
 		fmt.Println(err)
 		return 0
@@ -151,4 +159,11 @@ func (service *ClientService) DeleteFoodItem(foodItemName string) int {
 	}
 
 	return 1
+}
+
+func initFoodItemServiceUrl() {
+	hostUrl = os.Getenv("NUTRIPORT_SERVICE_URL")
+	if len(hostUrl) == 0 {
+		hostUrl = "http://localhost:8085/"
+	}
 }

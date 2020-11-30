@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nutriport
+  labels:
+    app: nutriport
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nutriport
+  template:
+    metadata:
+      labels:
+        app: nutriport
+        tier: service
+    spec:
+      containers:
+      - name: nutriport
+        image: nutriport:0.0.2
+        ports:
+        - containerPort: 8085
+        env:
+        - name: DB_POSTGRES_DRIVER
+          value: "postgres"
+        - name: DB_USER
+          value: ""
+        - name: DB_PASSWORD
+          value: ""
+        - name: DB_HOST
+          value: ""
+        - name: DB_NAME
+          value: ""
+        - name: DB_PORT
+          value: ""
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 250m
+          limits:
+            memory: 128Mi
+            cpu: 250m
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8085
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8085
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
