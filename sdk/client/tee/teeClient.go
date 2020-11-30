@@ -12,10 +12,13 @@ import (
 	"github.com/garcialuis/Nutriport/sdk/models"
 )
 
+var hostUrl string
+
 type ClientService struct {
 }
 
 func NewClientService() *ClientService {
+	initTEEServiceUrl()
 	return &ClientService{}
 }
 
@@ -27,7 +30,8 @@ func (service *ClientService) CalculateTotalEnergyExpenditure(age int, gender in
 	genderStr := strconv.Itoa(gender)
 	weightStr := fmt.Sprintf("%f", weight)
 
-	req, err := http.NewRequest("GET", "http://localhost:8085/tee", nil)
+	url := fmt.Sprint(hostUrl, "tee")
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Print(err)
 		os.Exit(1)
@@ -56,4 +60,11 @@ func (service *ClientService) CalculateTotalEnergyExpenditure(age int, gender in
 	}
 
 	return personInfo
+}
+
+func initTEEServiceUrl() {
+	hostUrl = os.Getenv("SERVICE_URL")
+	if len(hostUrl) == 0 {
+		hostUrl = "http://localhost:8085/"
+	}
 }
