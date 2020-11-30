@@ -60,7 +60,7 @@ func (service *BMIClientService) CalculateImperialBMI(weight, height float64) mo
 }
 
 func initBMIServiceUrl() {
-	hostUrl = os.Getenv("SERVICE_URL")
+	hostUrl = os.Getenv("NUTRIPORT_SERVICE_URL")
 	if len(hostUrl) == 0 {
 		hostUrl = "http://localhost:8085/"
 	}

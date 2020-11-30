@@ -162,7 +162,7 @@ func (service *ClientService) DeleteFoodItem(foodItemName string) int {
 }
 
 func initFoodItemServiceUrl() {
-	hostUrl = os.Getenv("SERVICE_URL")
+	hostUrl = os.Getenv("NUTRIPORT_SERVICE_URL")
 	if len(hostUrl) == 0 {
 		hostUrl = "http://localhost:8085/"
 	}

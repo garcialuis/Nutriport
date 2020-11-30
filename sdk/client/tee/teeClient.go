@@ -63,7 +63,7 @@ func (service *ClientService) CalculateTotalEnergyExpenditure(age int, gender in
 }
 
 func initTEEServiceUrl() {
-	hostUrl = os.Getenv("SERVICE_URL")
+	hostUrl = os.Getenv("NUTRIPORT_SERVICE_URL")
 	if len(hostUrl) == 0 {
 		hostUrl = "http://localhost:8085/"
 	}
