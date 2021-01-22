@@ -100,17 +100,17 @@ func (item *FoodItem) SelectAll(db *gorm.DB) (*[]FoodItem, error) {
 	}
 	if len(foodItems) > 0 {
 		for i := range foodItems {
-			err = db.Debug().Model(&FoodVariety{}).Where("id = ?", foodItems[i].FoodVarietyID).Take(&foodItems[i].Variety).Error
+			err = db.Model(&FoodVariety{}).Where("id = ?", foodItems[i].FoodVarietyID).Take(&foodItems[i].Variety).Error
 			if err != nil {
 				return &[]FoodItem{}, err
 			}
 
-			err = db.Debug().Model(&FoodGroup{}).Where("id = ?", foodItems[i].FoodGroupID).Take(&foodItems[i].Group).Error
+			err = db.Model(&FoodGroup{}).Where("id = ?", foodItems[i].FoodGroupID).Take(&foodItems[i].Group).Error
 			if err != nil {
 				return &[]FoodItem{}, err
 			}
 
-			err = db.Debug().Model(&CarbLevel{}).Where("id = ?", foodItems[i].CarbLevelID).Take(&foodItems[i].CarbLevel).Error
+			err = db.Model(&CarbLevel{}).Where("id = ?", foodItems[i].CarbLevelID).Take(&foodItems[i].CarbLevel).Error
 			if err != nil {
 				return &[]FoodItem{}, err
 			}
