@@ -24,19 +24,19 @@ var foodVarieties = []models.FoodVariety{
 		FoodVarietyName: "Raw",
 	},
 	{
-		FoodVarietyName: "Coocked from frozen",
+		FoodVarietyName: "Cooked from frozen",
 	},
 	{
-		FoodVarietyName: "Coocked from frozen with skin",
+		FoodVarietyName: "Cooked from frozen with skin",
 	},
 	{
-		FoodVarietyName: "Coocked from fresh",
+		FoodVarietyName: "Cooked from fresh",
 	},
 	{
-		FoodVarietyName: "Coocked from fresh with skin",
+		FoodVarietyName: "Cooked from fresh with skin",
 	},
 	{
-		FoodVarietyName: "Coocked from canned",
+		FoodVarietyName: "Cooked from canned",
 	},
 	{
 		FoodVarietyName: "Canned",
@@ -114,6 +114,15 @@ func Load(db *gorm.DB) {
 		err = db.Debug().Model(&models.FoodGroup{}).Create(&foodGroups[i]).Error
 		if err != nil {
 			log.Fatalf("Could not seed FoodGroup table: %v", err)
+		}
+	}
+
+	foodItemList := getFoodItemList()
+
+	for i := range foodItemList {
+		err = db.Model(&models.FoodItem{}).Create(&foodItemList[i]).Error
+		if err != nil {
+			log.Fatalf("Could not seed foodItems from tsv file at index: %d : %v", i, err)
 		}
 	}
 }

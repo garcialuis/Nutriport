@@ -81,7 +81,7 @@ func TestCreateFoodItem(t *testing.T) {
 
 	nutriportClient := nutriportclient.NewClient()
 
-	itemName := "Cucumber"
+	itemName := "Cucumber Test"
 	var cupQtty float32 = 1
 	var gWt float32 = 141.74
 	var oWt float32 = 5
@@ -116,10 +116,10 @@ func TestGetFoodItems(t *testing.T) {
 	if err != nil {
 		log.Fatalf("Failed to retrieve food items due to: %v", err)
 	}
-
+	// Expected: Arugula	Raw	0.5	10	0.35	1	chopped
 	foodItemsPayload := foodItems.GetPayload()
 	fmt.Printf("Name: %#v, FoodGroup: %v\n", *foodItemsPayload[0].Name, foodItemsPayload[0].FoodGroup.FoodGroupName)
-	assert.Equal(t, "Cucumber", *foodItemsPayload[0].Name)
+	assert.Equal(t, "Arugula", *foodItemsPayload[0].Name)
 	assert.Equal(t, "Raw", foodItemsPayload[0].Variety.FoodVarietyName)
 	assert.Equal(t, "Vegetables", foodItemsPayload[0].FoodGroup.FoodGroupName)
 }
@@ -129,15 +129,15 @@ func TestGetAllFoodItems(t *testing.T) {
 	nutriportClient := nutriportclient.NewClient()
 
 	foodItems := nutriportClient.GetAllFoodItems()
-
-	assert.Equal(t, 1, len(foodItems))
+	// There are 127 seeded records from tsv file, + 1 additional record from food item creation test
+	assert.Equal(t, 128, len(foodItems))
 }
 
 func TestDeleteFoodItem(t *testing.T) {
 
 	nutriportClient := nutriportclient.NewClient()
 
-	foodItemName := "Cucumber"
+	foodItemName := "Cucumber Test"
 	affectedRecords := nutriportClient.DeleteFoodItem(foodItemName)
 
 	assert.Equal(t, 1, affectedRecords)
