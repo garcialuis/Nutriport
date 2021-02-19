@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nutriport
-        image: nutriport:0.0.2
+        image: garcialuiz/nutriport:0.0.3
         ports:
         - containerPort: 8085
         env:
